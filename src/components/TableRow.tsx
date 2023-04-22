@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IClient } from "../interfaces/IClient";
 import { UpdateClientModal } from "../screens/client/Modals/UpdateClientModal";
 import { Link } from "react-router-dom";
-import { AlertDialog } from "./Alert/AlertDialog";
+import { AlertDialog } from "./AlertDialog";
 import { deleteClient } from "../api/client/client.services";
 import { useMutation } from "react-query";
 import toast from "react-hot-toast";
