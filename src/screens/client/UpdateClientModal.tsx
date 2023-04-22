@@ -1,27 +1,32 @@
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { createClient } from "../api/client/client.services";
-import { ICreateClient } from "../interfaces/ICreateClient";
+import { updateClient } from "../../api/client/client.services";
+import { ICreateClient } from "../../interfaces/ICreateClient";
 import toast from "react-hot-toast";
+import { IClient } from "../../interfaces/IClient";
+import { useEffect } from "react";
 
 type Props = {
+  client: IClient;
   closeModal(): void;
 };
 
-export const CreateClientModal = ({ closeModal }: Props): JSX.Element => {
+export const UpdateClientModal = ({
+  closeModal,
+  client,
+}: Props): JSX.Element => {
   const {
     register,
     handleSubmit,
-    reset,
+    setValue,
     formState: { errors },
   } = useForm<ICreateClient>();
 
   const { mutate } = useMutation(
-    (client: ICreateClient) => createClient(client),
+    (data: ICreateClient) => updateClient(data, client.id),
     {
       onSuccess: async (data) => {
-        toast.success("Client added successfully.");
-        reset();
+        toast.success("Client updated successfully.");
       },
       onError: (error) => {
         console.log(error);
@@ -31,6 +36,12 @@ export const CreateClientModal = ({ closeModal }: Props): JSX.Element => {
 
   const onSubmit = (data: ICreateClient) => mutate(data);
 
+  useEffect(() => {
+    setValue("name", client.name);
+    setValue("phone", client.phone);
+    setValue("email", client.email);
+  }, [client]);
+
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -39,9 +50,7 @@ export const CreateClientModal = ({ closeModal }: Props): JSX.Element => {
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             {/*header*/}
             <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-              <h3 className="text-3xl font-semibold px-10">
-                Create New Client
-              </h3>
+              <h3 className="text-3xl font-semibold px-10">Update Client</h3>
               <button
                 className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
                 onClick={closeModal}

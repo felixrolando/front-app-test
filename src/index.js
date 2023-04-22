@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import AppClient from "./App";
+import { BrowserRouter } from "react-router-dom";
 
 import { QueryClientProvider, QueryClient } from "react-query";
 
@@ -12,7 +13,9 @@ function App() {
   return (
     // Provide the client to your App
     <QueryClientProvider client={queryClient}>
-      <AppClient />
+      <BrowserRouter>
+        <AppClient />
+      </BrowserRouter>
     </QueryClientProvider>
   );
 }
