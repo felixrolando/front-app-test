@@ -39,7 +39,7 @@ export const UpdateClientModal = ({
 
   return (
     <Modal
-      title={`Update Client: ${client.name.toLocaleUpperCase()}`}
+      title={`Update Client: ${client.first_name.toLocaleUpperCase()}`}
       closeModal={closeModal}
       action={handleSubmit(onSubmit)}
       body={

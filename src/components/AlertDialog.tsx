@@ -26,7 +26,15 @@ export const AlertDialog = ({
                   viewBox="0 0 24 24"
                   strokeWidth="2"
                   stroke="currentColor"
-                  className={`mx-auto mb-4 text-${color}-400 w-14 h-14 dark:text-${color}-400`}
+                  className={`mx-auto mb-4  w-14 h-14 ${
+                    color == "red"
+                      ? "dark:text-red-400"
+                      : color == "blue"
+                      ? "dark:text-blue-400"
+                      : color == "yellow"
+                      ? "dark:text-yellow-400"
+                      : "dark:text-black-400"
+                  }`}
                 >
                   <path
                     strokeLinecap="round"
@@ -43,7 +51,15 @@ export const AlertDialog = ({
                   viewBox="0 0 24 24"
                   strokeWidth="2"
                   stroke="currentColor"
-                  className={`mx-auto mb-4 text-${color}-400 w-14 h-14 dark:text-${color}-400`}
+                  className={`mx-auto mb-4  w-14 h-14 ${
+                    color == "red"
+                      ? "dark:text-red-400"
+                      : color == "blue"
+                      ? "dark:text-blue-400"
+                      : color == "yellow"
+                      ? "dark:text-yellow-400"
+                      : "dark:text-black-400"
+                  }`}
                 >
                   <path
                     strokeLinecap="round"
@@ -60,7 +76,15 @@ export const AlertDialog = ({
                   viewBox="0 0 24 24"
                   strokeWidth="2"
                   stroke="currentColor"
-                  className={`mx-auto mb-4 text-${color}-400 w-14 h-14 dark:text-${color}-400`}
+                  className={`mx-auto mb-4  w-14 h-14 ${
+                    color == "red"
+                      ? "dark:text-red-400"
+                      : color == "blue"
+                      ? "dark:text-blue-400"
+                      : color == "yellow"
+                      ? "dark:text-yellow-400"
+                      : "dark:text-black-400"
+                  }`}
                 >
                   <path
                     strokeLinecap="round"

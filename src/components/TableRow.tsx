@@ -49,7 +49,7 @@ export const TableRow = ({ data }: Props): JSX.Element => {
       {client && deleteClientModal && (
         <AlertDialog
           closeAlert={toggleModalDeleteClient}
-          text={`Are you sure you want to delete this client: ${client.name.toUpperCase()}?`}
+          text={`Are you sure you want to delete this client: ${client.first_name.toUpperCase()}?`}
           action={deleteClientAction}
           type="Info"
           color="red"
@@ -69,7 +69,15 @@ export const TableRow = ({ data }: Props): JSX.Element => {
             </td>
 
             <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              <div className="text-sm leading-5 text-gray-900">{row.name}</div>
+              <div className="text-sm leading-5 text-gray-900">
+                {row.first_name}
+              </div>
+            </td>
+
+            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div className="text-sm leading-5 text-gray-900">
+                {row.last_name}
+              </div>
             </td>
 
             <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">

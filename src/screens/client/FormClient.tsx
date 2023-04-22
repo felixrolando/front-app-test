@@ -15,7 +15,8 @@ export const FormClient = ({
 }: Props): JSX.Element => {
   useEffect(() => {
     if (setValue && client) {
-      setValue("name", client.name);
+      setValue("first_name", client.first_name);
+      setValue("last_name", client.last_name);
       setValue("phone", client.phone);
       setValue("email", client.email);
     }
@@ -25,17 +26,33 @@ export const FormClient = ({
     <form className="space-y-6">
       <div>
         <label
-          htmlFor="name"
+          htmlFor="first_name"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-blue"
         >
-          Name
+          First Name
         </label>
         <input
           type="text"
-          id="name"
+          id="first_name"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-          placeholder="jose perez"
-          {...register("name", { required: true })}
+          placeholder="jose"
+          {...register("first_name", { required: true })}
+        />
+      </div>
+
+      <div>
+        <label
+          htmlFor="last_name"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-blue"
+        >
+          Last Name
+        </label>
+        <input
+          type="text"
+          id="last_name"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+          placeholder="perez"
+          {...register("last_name", { required: true })}
         />
       </div>
 
