@@ -1,4 +1,4 @@
-export const ClientPerfils = (): JSX.Element => {
+export const ListClientPerfils = (): JSX.Element => {
   return (
     <div className="container max-w-7xl mx-auto mt-8">
       <div className="mb-4">

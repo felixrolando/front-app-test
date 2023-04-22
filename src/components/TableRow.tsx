@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IClient } from "../interfaces/IClient";
-import { UpdateClientModal } from "../screens/client/UpdateClientModal";
+import { UpdateClientModal } from "../screens/client/Modals/UpdateClientModal";
 import { Link } from "react-router-dom";
 import { AlertDialog } from "./Alert/AlertDialog";
 import { deleteClient } from "../api/client/client.services";
