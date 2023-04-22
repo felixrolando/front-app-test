@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { IClient } from "../interfaces/IClient";
-import { AlertDeleteClient } from "./Alert/DeleteClient";
 import { UpdateClientModal } from "../screens/client/UpdateClientModal";
 import { Link } from "react-router-dom";
+import { AlertDialog } from "./Alert/AlertDialog";
+import { deleteClient } from "../api/client/client.services";
+import { useMutation } from "react-query";
+import toast from "react-hot-toast";
 
 type Props = {
   data: IClient[];
@@ -15,6 +18,19 @@ export const TableRow = ({ data }: Props): JSX.Element => {
 
   const toggleModalDeleteClient = () => setDeleteClientModal((value) => !value);
   const toggleModaUpdateClient = () => setUpdateClientModal((value) => !value);
+
+  const { mutate: deleteClientAction } = useMutation(
+    () => deleteClient(client ? client.id : 0),
+    {
+      onSuccess: async (data) => {
+        toast.success("Client deleted successfully.");
+        toggleModalDeleteClient();
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    }
+  );
 
   const handleDeleteClick = (event: any, row: IClient) => {
     toggleModalDeleteClient();
@@ -31,9 +47,12 @@ export const TableRow = ({ data }: Props): JSX.Element => {
   return (
     <>
       {client && deleteClientModal && (
-        <AlertDeleteClient
-          closeModal={toggleModalDeleteClient}
-          client={client}
+        <AlertDialog
+          closeAlert={toggleModalDeleteClient}
+          text={`Are you sure you want to delete this client: ${client.name.toUpperCase()}?`}
+          action={deleteClientAction}
+          type="Info"
+          color="red"
         />
       )}
       {client && updateClientModal && (
