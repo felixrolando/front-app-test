@@ -56,7 +56,8 @@ export const ListClientPerfils = (): JSX.Element => {
       {perfil && deletePerfilModal && (
         <AlertDialog
           closeAlert={toggleModalDeletePerfil}
-          text={`Are you sure you want to delete this perfil: ${perfil.description.toUpperCase()}?`}
+          info={`Are you sure you want to delete this perfil:`}
+          text={`${perfil.description.toUpperCase()}`}
           action={deletePerfilAction}
           type="Info"
           color="red"

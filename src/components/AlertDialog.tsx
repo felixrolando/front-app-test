@@ -1,5 +1,6 @@
 type Props = {
-  text: string;
+  info: string;
+  text?: string;
   closeAlert(): void;
   action(): void;
   type?: "Error" | "Info" | "Warning";
@@ -10,6 +11,7 @@ export const AlertDialog = ({
   closeAlert,
   action,
   text,
+  info,
   type,
   color,
 }: Props): JSX.Element => {
@@ -95,8 +97,9 @@ export const AlertDialog = ({
               )}
 
               <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                {text}
+                {info}
               </h3>
+              <p className="text-center">{text}</p>
             </div>
             <button
               type="button"

@@ -49,7 +49,8 @@ export const TableRow = ({ data }: Props): JSX.Element => {
       {client && deleteClientModal && (
         <AlertDialog
           closeAlert={toggleModalDeleteClient}
-          text={`Are you sure you want to delete this client: ${client.first_name.toUpperCase()}?`}
+          info={`Are you sure you want to delete this client:`}
+          text={`${client.first_name.toUpperCase()}`}
           action={deleteClientAction}
           type="Info"
           color="red"
