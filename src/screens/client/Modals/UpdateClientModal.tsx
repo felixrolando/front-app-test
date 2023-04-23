@@ -1,4 +1,3 @@
-import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { updateClient } from "../../../api/client/client.services";
 import { ICreateClient } from "../../../interfaces/ICreateClient";
@@ -16,13 +15,6 @@ export const UpdateClientModal = ({
   closeModal,
   client,
 }: Props): JSX.Element => {
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm<ICreateClient>();
-
   const { mutate } = useMutation(
     (data: ICreateClient) => updateClient(data, client.id),
     {
@@ -41,9 +33,13 @@ export const UpdateClientModal = ({
     <Modal
       title={`Update Client: ${client.first_name.toLocaleUpperCase()}`}
       closeModal={closeModal}
-      action={handleSubmit(onSubmit)}
+      showButtons={false}
       body={
-        <FormClient register={register} setValue={setValue} client={client} />
+        <FormClient
+          onSubmit={onSubmit}
+          client={client}
+          closeForm={closeModal}
+        />
       }
     />
   );

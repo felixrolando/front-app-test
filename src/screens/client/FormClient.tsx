@@ -1,91 +1,75 @@
-import { UseFormRegister, UseFormSetValue } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { ICreateClient } from "../../interfaces/ICreateClient";
-import { useEffect } from "react";
-
+import { InputWithLabel } from "../../components/input/InputWithLabel";
+import { IClient } from "../../interfaces/IClient";
 type Props = {
-  register: UseFormRegister<ICreateClient>;
-  client?: ICreateClient;
-  setValue?: UseFormSetValue<ICreateClient>;
+  onSubmit: (data: ICreateClient) => void;
+  client?: IClient;
+  closeForm: () => void;
 };
 
 export const FormClient = ({
-  register,
+  onSubmit,
   client,
-  setValue,
+  closeForm,
 }: Props): JSX.Element => {
-  useEffect(() => {
-    if (setValue && client) {
-      setValue("first_name", client.first_name);
-      setValue("last_name", client.last_name);
-      setValue("phone", client.phone);
-      setValue("email", client.email);
-    }
-  }, []);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ICreateClient>();
 
   return (
-    <form className="space-y-6">
+    <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <label
-          htmlFor="first_name"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-blue"
-        >
-          First Name
-        </label>
-        <input
-          type="text"
-          id="first_name"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-          placeholder="jose"
-          {...register("first_name", { required: true })}
+        <InputWithLabel
+          control={control}
+          name={"first_name"}
+          label="First Name"
+          defaultValue={client ? client.first_name : ""}
         />
       </div>
 
       <div>
-        <label
-          htmlFor="last_name"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-blue"
-        >
-          Last Name
-        </label>
-        <input
-          type="text"
-          id="last_name"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-          placeholder="perez"
-          {...register("last_name", { required: true })}
+        <InputWithLabel
+          control={control}
+          name={"last_name"}
+          label="Last Name"
+          defaultValue={client ? client.last_name : ""}
         />
       </div>
 
       <div>
-        <label
-          htmlFor="phone"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-blue"
-        >
-          Phone
-        </label>
-        <input
-          type="text"
-          id="phone"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-          placeholder="809-574-5412"
-          {...register("phone", { required: true })}
+        <InputWithLabel
+          control={control}
+          name={"phone"}
+          label="Phone"
+          defaultValue={client ? client.phone : ""}
         />
       </div>
 
       <div>
-        <label
-          htmlFor="email"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-blue"
-        >
-          Email
-        </label>
-        <input
-          type="email"
-          id="email"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-          placeholder="joseperez@hotmail.com"
-          {...register("email", { required: true })}
+        <InputWithLabel
+          control={control}
+          name={"email"}
+          label="Email"
+          defaultValue={client ? client.email : ""}
         />
+      </div>
+      <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+        <button
+          className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          type="button"
+          onClick={closeForm}
+        >
+          Close
+        </button>
+        <button
+          className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          type="submit"
+        >
+          Save
+        </button>
       </div>
     </form>
   );
