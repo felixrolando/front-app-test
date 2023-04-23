@@ -1,26 +1,32 @@
 import { Control, Controller } from "react-hook-form";
-import { ICreateClient } from "../../interfaces/ICreateClient";
 import { InputField } from "./InputField";
 
 type Props = {
-  control: Control<ICreateClient>;
-  name: "first_name" | "last_name" | "phone" | "email";
-  label: string;
+  control: Control<any>;
+  name: string;
   defaultValue: any;
+  label: string;
 };
 
-export const InputWithLabel = ({
+export const ControllerInput = ({
   control,
   name,
-  label,
   defaultValue,
+  label,
 }: Props): JSX.Element => {
   return (
     <>
       <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-blue">
         {label}
       </label>
-      <InputField control={control} name={name} defaultValue={defaultValue} />
+      <Controller
+        control={control}
+        name={name}
+        defaultValue={defaultValue}
+        render={({ field: { name, onChange, value } }) => (
+          <InputField name={name} value={value} onChange={onChange} />
+        )}
+      />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { ICreateClient } from "../../interfaces/ICreateClient";
-import { InputWithLabel } from "../../components/input/InputWithLabel";
 import { IClient } from "../../interfaces/IClient";
+import { ControllerInput } from "../../components/input/ControllerInput";
 type Props = {
   onSubmit: (data: ICreateClient) => void;
   client?: IClient;
@@ -22,7 +22,7 @@ export const FormClient = ({
   return (
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <InputWithLabel
+        <ControllerInput
           control={control}
           name={"first_name"}
           label="First Name"
@@ -31,7 +31,7 @@ export const FormClient = ({
       </div>
 
       <div>
-        <InputWithLabel
+        <ControllerInput
           control={control}
           name={"last_name"}
           label="Last Name"
@@ -40,7 +40,7 @@ export const FormClient = ({
       </div>
 
       <div>
-        <InputWithLabel
+        <ControllerInput
           control={control}
           name={"phone"}
           label="Phone"
@@ -49,7 +49,7 @@ export const FormClient = ({
       </div>
 
       <div>
-        <InputWithLabel
+        <ControllerInput
           control={control}
           name={"email"}
           label="Email"
