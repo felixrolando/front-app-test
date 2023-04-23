@@ -1,8 +1,8 @@
 import { useMutation } from "react-query";
 import { updateClient } from "../../../api/client/client.services";
-import { ICreateClient } from "../../../interfaces/ICreateClient";
+import { ICreateClient } from "../../../interfaces/client/ICreateClient";
 import toast from "react-hot-toast";
-import { IClient } from "../../../interfaces/IClient";
+import { IClient } from "../../../interfaces/client/IClient";
 import { Modal } from "../../../components/Modal";
 import { FormClient } from "../FormClient";
 

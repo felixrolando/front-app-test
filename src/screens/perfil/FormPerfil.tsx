@@ -1,61 +1,35 @@
 import { useForm } from "react-hook-form";
-import { ICreateClient } from "../../interfaces/client/ICreateClient";
-import { IClient } from "../../interfaces/client/IClient";
 import { ControllerInput } from "../../components/input/ControllerInput";
+import { ICreatePerfil } from "../../interfaces/perfil/ICreatePerfil";
+import { IPerfil } from "../../interfaces/perfil/IPerfil";
 type Props = {
-  onSubmit: (data: ICreateClient) => void;
-  client?: IClient;
+  onSubmit: (data: ICreatePerfil) => void;
+  perfil?: IPerfil;
   closeForm: () => void;
 };
 
-export const FormClient = ({
+export const FormPerfil = ({
   onSubmit,
-  client,
+  perfil,
   closeForm,
 }: Props): JSX.Element => {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<ICreateClient>();
+  } = useForm<ICreatePerfil>();
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
       <div>
         <ControllerInput
           control={control}
-          name={"first_name"}
-          label="First Name"
-          defaultValue={client ? client.first_name : ""}
+          name={"description"}
+          label="Description"
+          defaultValue={perfil ? perfil.description : ""}
         />
       </div>
 
-      <div>
-        <ControllerInput
-          control={control}
-          name={"last_name"}
-          label="Last Name"
-          defaultValue={client ? client.last_name : ""}
-        />
-      </div>
-
-      <div>
-        <ControllerInput
-          control={control}
-          name={"phone"}
-          label="Phone"
-          defaultValue={client ? client.phone : ""}
-        />
-      </div>
-
-      <div>
-        <ControllerInput
-          control={control}
-          name={"email"}
-          label="Email"
-          defaultValue={client ? client.email : ""}
-        />
-      </div>
       <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
         <button
           className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"

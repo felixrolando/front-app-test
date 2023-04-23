@@ -1,8 +1,8 @@
-import { IClient } from "../../interfaces/client/IClient";
-import { ICreateClient } from "../../interfaces/client/ICreateClient";
+import { IAddress } from "../../interfaces/address/IAddress";
+import { ICreateAddress } from "../../interfaces/address/ICreateAddress";
 const apiUrl = process.env.REACT_APP_API_SERVER;
 
-export async function listAllClient(): Promise<IClient[]> {
+export async function listAllAddress(): Promise<IAddress[]> {
     const response = await fetch(`${apiUrl}/api/V1/client`, {
         method: 'GET',
         headers: {
@@ -12,7 +12,7 @@ export async function listAllClient(): Promise<IClient[]> {
     return await response.json();
 }
 
-export async function createClient(data: ICreateClient): Promise<IClient> {
+export async function createAddress(data: ICreateAddress): Promise<IAddress> {
     const response = await fetch(`${apiUrl}/api/V1/client`, {
         method: 'POST',
         headers: {
@@ -24,8 +24,8 @@ export async function createClient(data: ICreateClient): Promise<IClient> {
 }
 
 
-export async function updateClient(data: ICreateClient, clientId: number): Promise<IClient> {
-    const response = await fetch(`${apiUrl}/api/V1/client/${clientId}`, {
+export async function updateAddress(data: ICreateAddress, addressId: number): Promise<IAddress> {
+    const response = await fetch(`${apiUrl}/api/V1/client/${addressId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -35,8 +35,8 @@ export async function updateClient(data: ICreateClient, clientId: number): Promi
     return await response.json();
 }
 
-export async function deleteClient(clientId: number): Promise<boolean> {
-    const response = await fetch(`${apiUrl}/api/V1/client/${clientId}`, {
+export async function deleteAddress(addressId: number): Promise<boolean> {
+    const response = await fetch(`${apiUrl}/api/V1/client/${addressId}`, {
         method: 'DELETE'
     })
 
