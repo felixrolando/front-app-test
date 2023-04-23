@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { listAllClient } from "../../api/client/client.services";
-import { TableRow } from "../../components/TableRow";
-import { TableHead } from "../../components/TableHead";
+import { TableRow } from "./components/TableRow";
+import { TableHead } from "./components/TableHead";
 import { CreateClientModal } from "./Modals/CreateClientModal";
 import { useState } from "react";
 
