@@ -31,7 +31,7 @@ export const UpdatePerfilModal = ({
 
   return (
     <Modal
-      title={"Update New Perfil"}
+      title={"Update Perfil"}
       closeModal={closeModal}
       showButtons={false}
       body={

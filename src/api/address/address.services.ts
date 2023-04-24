@@ -3,7 +3,7 @@ import { ICreateAddress } from "../../interfaces/address/ICreateAddress";
 const apiUrl = process.env.REACT_APP_API_SERVER;
 
 export async function listAllAddress(): Promise<IAddress[]> {
-    const response = await fetch(`${apiUrl}/api/V1/client`, {
+    const response = await fetch(`${apiUrl}/api/V1/address`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -12,20 +12,30 @@ export async function listAllAddress(): Promise<IAddress[]> {
     return await response.json();
 }
 
-export async function createAddress(data: ICreateAddress): Promise<IAddress> {
-    const response = await fetch(`${apiUrl}/api/V1/client`, {
+export async function createAddress(data: ICreateAddress, clientId: number): Promise<IAddress> {
+    const body = {
+        ...data,
+        client_id: clientId
+    }
+    const response = await fetch(`${apiUrl}/api/V1/address`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(body)
     })
+
+    if (!response.ok) {
+        const { error } = await response.json();
+        throw new Error(error)
+    }
+
     return await response.json();
 }
 
 
 export async function updateAddress(data: ICreateAddress, addressId: number): Promise<IAddress> {
-    const response = await fetch(`${apiUrl}/api/V1/client/${addressId}`, {
+    const response = await fetch(`${apiUrl}/api/V1/address/${addressId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -36,7 +46,7 @@ export async function updateAddress(data: ICreateAddress, addressId: number): Pr
 }
 
 export async function deleteAddress(addressId: number): Promise<boolean> {
-    const response = await fetch(`${apiUrl}/api/V1/client/${addressId}`, {
+    const response = await fetch(`${apiUrl}/api/V1/address/${addressId}`, {
         method: 'DELETE'
     })
 

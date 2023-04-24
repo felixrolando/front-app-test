@@ -113,7 +113,10 @@ export const TableRow = ({ data }: Props): JSX.Element => {
             </td>
 
             <td className="text-sm font-medium leading-5 text-center whitespace-no-wrap border-b border-gray-200 ">
-              <a href="!#" className="text-gray-600 hover:text-gray-900">
+              <Link
+                to={`/address/${row.id}`}
+                className="text-green-600 hover:text-green-900"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-6 h-6"
@@ -134,7 +137,7 @@ export const TableRow = ({ data }: Props): JSX.Element => {
                     d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                   />
                 </svg>
-              </a>
+              </Link>
             </td>
             <td className="text-sm font-medium leading-5 text-center whitespace-no-wrap border-b border-gray-200 ">
               <Link
