@@ -161,6 +161,11 @@ export const ListClientAddress = (): JSX.Element => {
           );
         })}
       </div>
+      {data?.length == 0 && (
+        <h3 className="text-3xl font-bold dark:text-black m-auto text-center">
+          No address registered yet
+        </h3>
+      )}
     </div>
   );
 };
