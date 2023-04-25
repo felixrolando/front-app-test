@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { updateClient } from "../../../api/client/client.services";
 import { ICreateClient } from "../../../interfaces/client/ICreateClient";
 import toast from "react-hot-toast";
@@ -15,11 +15,13 @@ export const UpdateClientModal = ({
   closeModal,
   client,
 }: Props): JSX.Element => {
+  const queryClient = useQueryClient();
   const { mutate } = useMutation(
     (data: ICreateClient) => updateClient(data, client.id),
     {
       onSuccess: async (data) => {
         toast.success("Client updated successfully.");
+        queryClient.setQueryData(["listClient", { id: client.id }], data);
       },
       onError: (error) => {
         console.log(error);

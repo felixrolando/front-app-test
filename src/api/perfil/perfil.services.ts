@@ -3,7 +3,7 @@ import { IPerfil } from "../../interfaces/perfil/IPerfil";
 const apiUrl = process.env.REACT_APP_API_SERVER;
 
 export async function listAllPerfil(): Promise<IPerfil[]> {
-    const response = await fetch(`${apiUrl}/api/V1/perfil`, {
+    const response = await fetch(`${apiUrl}/perfils`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -17,7 +17,7 @@ export async function createPerfil(data: ICreatePerfil, clientId: number): Promi
         ...data,
         client_id: clientId
     }
-    const response = await fetch(`${apiUrl}/api/V1/perfil`, {
+    const response = await fetch(`${apiUrl}/perfils`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ export async function createPerfil(data: ICreatePerfil, clientId: number): Promi
 
 
 export async function updatePerfil(data: ICreatePerfil, perfilId: number): Promise<IPerfil> {
-    const response = await fetch(`${apiUrl}/api/V1/perfil/${perfilId}`, {
+    const response = await fetch(`${apiUrl}/perfils/${perfilId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ export async function updatePerfil(data: ICreatePerfil, perfilId: number): Promi
 }
 
 export async function deletePerfil(perfilId: number): Promise<boolean> {
-    const response = await fetch(`${apiUrl}/api/V1/perfil/${perfilId}`, {
+    const response = await fetch(`${apiUrl}/perfils/${perfilId}`, {
         method: 'DELETE'
     })
 

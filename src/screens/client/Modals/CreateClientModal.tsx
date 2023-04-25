@@ -1,20 +1,24 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { createClient } from "../../../api/client/client.services";
 import { ICreateClient } from "../../../interfaces/client/ICreateClient";
 import toast from "react-hot-toast";
 import { Modal } from "../../../components/Modal";
 import { FormClient } from "../FormClient";
-
 type Props = {
   closeModal(): void;
 };
 
 export const CreateClientModal = ({ closeModal }: Props): JSX.Element => {
+  const queryClient = useQueryClient();
   const { mutate: createClientAction } = useMutation(
     (client: ICreateClient) => createClient(client),
     {
       onSuccess: async (data) => {
         toast.success("Client added successfully.");
+        queryClient.setQueriesData("listClient", (oldData: any) => [
+          ...oldData,
+          data,
+        ]);
       },
       onError: (error) => {
         console.log(error);

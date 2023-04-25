@@ -4,7 +4,7 @@ import { UpdateClientModal } from "../Modals/UpdateClientModal";
 import { Link } from "react-router-dom";
 import { AlertDialog } from "../../../components/AlertDialog";
 import { deleteClient } from "../../../api/client/client.services";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import toast from "react-hot-toast";
 
 type Props = {
@@ -15,6 +15,7 @@ export const TableRow = ({ data }: Props): JSX.Element => {
   const [deleteClientModal, setDeleteClientModal] = useState<boolean>(false);
   const [updateClientModal, setUpdateClientModal] = useState<boolean>(false);
   const [client, setClient] = useState<IClient>();
+  const queryClient = useQueryClient();
 
   const toggleModalDeleteClient = () => setDeleteClientModal((value) => !value);
   const toggleModaUpdateClient = () => setUpdateClientModal((value) => !value);
@@ -24,6 +25,7 @@ export const TableRow = ({ data }: Props): JSX.Element => {
     {
       onSuccess: async (data) => {
         toast.success("Client deleted successfully.");
+        queryClient.fetchQuery("listClient");
         toggleModalDeleteClient();
       },
       onError: (error) => {

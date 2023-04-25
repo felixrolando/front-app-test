@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import toast from "react-hot-toast";
 import { Modal } from "../../../components/Modal";
 import { FormAddress } from "../FormAddress";
@@ -14,11 +14,16 @@ export const CreateAddressModal = ({
   closeModal,
   clientId,
 }: Props): JSX.Element => {
+  const queryClient = useQueryClient();
   const { mutate: createAddressAction } = useMutation(
     (address: ICreateAddress) => createAddress(address, clientId),
     {
       onSuccess: async (data) => {
         toast.success("Address added successfully.");
+        queryClient.setQueriesData("listAddress", (oldData: any) => [
+          ...oldData,
+          data,
+        ]);
       },
       onError: (error: any) => {
         toast.error(error.message);

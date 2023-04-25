@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import toast from "react-hot-toast";
 import { Modal } from "../../../components/Modal";
 import { FormPerfil } from "../FormPerfil";
@@ -14,11 +14,16 @@ export const CreatePerfilModal = ({
   closeModal,
   clientId,
 }: Props): JSX.Element => {
+  const queryClient = useQueryClient();
   const { mutate: createPerfilAction } = useMutation(
     (perfil: ICreatePerfil) => createPerfil(perfil, clientId),
     {
       onSuccess: async (data) => {
         toast.success("Perfil added successfully.");
+        queryClient.setQueriesData("listPerfil", (oldData: any) => [
+          ...oldData,
+          data,
+        ]);
       },
       onError: (error) => {
         console.log(error);
